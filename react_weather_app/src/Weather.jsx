@@ -2,27 +2,26 @@ import { useState, useEffect } from "react";
 
 function Weather() {
 
-  const [city, setCity] = useState("Bangalore"); // default city
-  const [data, setData] = useState(null); // store API data
+  const [city, setCity] = useState("Bangalore"); 
+  const [data, setData] = useState(null);
 
-  // 🔥 useEffect runs when city changes
   useEffect(() => {
     fetchWeather();
   }, []);
 
-  async function fetchWeather() {  //async waits for response and then continues
+  async function fetchWeather() { 
     const apiKey = "dd93ce5ce9905df61c542ce7300b610a";
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);//wait
-    const result = await res.json();  //
+    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+    const result = await res.json();  
 
     setData(result);
   }
 
   return (
-    <div style={{ textAlign: "center" }}>  //div moves to next line since it is block level element
+    <div style={{ textAlign: "center" }}>  
       <h1>Weather App</h1>
 
       <input
@@ -32,10 +31,10 @@ function Weather() {
       />
       <button onClick={fetchWeather}>Search</button>
 
-      {data && (   //it checks if data exists or not
+      {data && (  
         <div>
-          <h2>{data.name}</h2>  //Displays city name
-          <h3>{data.main.temp} °C</h3> //Api stores temperature inside main object
+          <h2>{data.name}</h2>  
+          <h3>{data.main.temp} °C</h3> 
           <p>{data.weather[0].main}</p>
         </div>
       )}
